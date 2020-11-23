@@ -12,6 +12,10 @@ class Todo extends React.Component {
         }
     }
 
+    handleBlur = (e) => {
+        this.setState({edit: -1});
+    }
+
     editTodo = (todoId, event) => {
         var newTodo =  event.target.value;
         var action = {
@@ -50,7 +54,7 @@ class Todo extends React.Component {
         var trList = todos.map( todo => {
 
             const viewTodo = (this.state.edit === todo.id ) ?
-                <td><input autoFocus type="text" onChange={this.editTodo.bind(null, todo.id)} onKeyUp={this.handleKeyPress} value={todo.todo} /></td> :
+                <td><input autoFocus type="text" onChange={this.editTodo.bind(null, todo.id)} onKeyUp={this.handleKeyPress} value={todo.todo} onBlur={this.handleBlur}/></td> :
                 <td onClick={this.editTodoViewInput.bind(null, todo.id)}>{todo.todo}</td>;
 
             return (<tr key={todo.id}>
